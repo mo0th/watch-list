@@ -10,7 +10,7 @@ const ItemSchema = new Schema(
     status: {
       type: String,
       enum: [
-        "to watch",
+        "unwatched",
         "watching",
         "decided not to watch",
         "watched",

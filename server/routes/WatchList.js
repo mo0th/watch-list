@@ -18,6 +18,21 @@ router.get("/", async (_req, res) => {
   }
 })
 
+router.get("/:id", async (req, res) => {
+  const { id } = req.params
+  try {
+    const item = await Item.findById(id)
+
+    if (!item) {
+      return res.status(404).send("Item not found")
+    }
+
+    res.json(item)
+  } catch (err) {
+    throw err
+  }
+})
+
 router.post("/", async (req, res) => {
   const { name, status } = req.body
   const newItem = new Item({
@@ -26,7 +41,7 @@ router.post("/", async (req, res) => {
   })
   try {
     const item = await newItem.save()
-    res.json(item)
+    res.status(201).json(item)
   } catch (err) {
     throw err
   }
@@ -34,12 +49,33 @@ router.post("/", async (req, res) => {
 
 router.delete("/:id", async (req, res) => {
   const { id } = req.params
-  // console.log(id)
+
   try {
-    const item = Item.findById(id)
+    const item = await Item.findByIdAndDelete(id)
+
+    if (!item) {
+      return res.status(404).send("Item not found")
+    }
+
     res.json(item)
-    await item.remove()
-    res.json({ message: "deleted" })
+  } catch (err) {
+    throw err
+  }
+})
+
+router.put("/:id", async (req, res) => {
+  const { status } = req.body
+  const { id } = req.params
+  try {
+    const item = await Item.findById(id)
+
+    if (item) {
+      return res.status(404).send("Item not found")
+    }
+
+    item.status = status
+    await item.save()
+    res.json(item)
   } catch (err) {
     throw err
   }
