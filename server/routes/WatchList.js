@@ -3,10 +3,9 @@ const Item = require("../models/Item")
 
 const router = express.Router()
 
-const stuff = require("./temp.json")
-
-router.get("/temp", (_req, res) => {
-  res.json({ stuff })
+router.get("/sample", (_req, res) => {
+  const stuff = require("./sample.json")
+  res.json(stuff.map((item, i) => ({ _id: i, ...item })))
 })
 
 router.get("/", async (_req, res) => {
@@ -69,7 +68,7 @@ router.put("/:id", async (req, res) => {
   try {
     const item = await Item.findById(id)
 
-    if (item) {
+    if (!item) {
       return res.status(404).send("Item not found")
     }
 

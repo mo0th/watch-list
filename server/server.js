@@ -35,6 +35,10 @@ const startServer = async () => {
     res.json({ message: "The server works! 🚀" })
   })
 
+  app.use((err, req, res, next) => {
+    res.send("ERROR!")
+  })
+
   const port = process.env.PORT || 5000
   app.listen(port, () => {
     console.log(`Server listening on port ${port}`)

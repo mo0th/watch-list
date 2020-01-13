@@ -1,14 +1,32 @@
 {
   "name": "watch-list-client",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "main": "index.js",
   "author": "Soorriamoorthy <soorria.ss@gmail.com> (http://soorria-saruva.surge.sh/)",
   "license": "MIT",
   "private": true,
+  "dependencies": {
+    "axios": "^0.19.1",
+    "react": ">=16.3.0",
+    "react-dom": ">=16.3.0",
+    "react-icons": "^3.8.0",
+    "styled-components": "^4.4.1"
+  },
   "devDependencies": {
     "parcel-bundler": "^1.12.4"
   },
   "scripts": {
-    "start": "parcel src/index.html"
+    "start": "parcel src/index.html",
+    "build": "parcel build src/index.html --no-source-maps",
+    "build:windows": "RD /S dist && parcel build src/index.html --no-source-maps"
+  },
+  "alias": {
+    "#assets": "./assets",
+    "#api": "./src/api",
+    "#components": "./src/components",
+    "#contexts": "./src/contexts",
+    "#helpers": "./src/helpers",
+    "#root": "./src",
+    "#shared": "./src/components/shared"
   }
 }

@@ -13,10 +13,11 @@ const ItemSchema = new Schema(
         "unwatched",
         "watching",
         "decided not to watch",
+        "on hold",
         "watched",
         "rewatching"
       ],
-      default: "to watch"
+      default: "unwatched"
     }
   },
   { timestamps: true }
